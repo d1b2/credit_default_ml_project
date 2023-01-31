@@ -1,0 +1,11 @@
+dvc
+pandas
+notebook
+numpy
+matplotlib
+seaborn
+Flask
+sklearn
+notebook
+
+-e .
