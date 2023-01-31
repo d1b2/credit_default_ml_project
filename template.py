@@ -18,7 +18,7 @@ list_of_files = [
    "tests/__init__.py",
    "tests/unit/__init__.py",
    "tests/integration/__init__.py",
-   "tests/sample_data/.gitkeep"
+   "tests/sample_data/.gitkeep",
    "configs/config.yaml",
    "dvc.yaml",
    "params.yaml",
