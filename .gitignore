@@ -134,3 +134,6 @@ dmypy.json
 #kaggle
 .kaggle/
 kaggle.json
+
+#artifacts
+artifacts/

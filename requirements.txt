@@ -6,11 +6,13 @@ matplotlib
 seaborn
 Flask
 sklearn
+kaggle
 notebook
 python-box==6.0.2
 pyYAML
 tqdm
 ensure==1.0.2
 joblib
-
+pathlib
+types-PyYAML
 -e .
