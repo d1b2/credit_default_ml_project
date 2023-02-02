@@ -1,0 +1,12 @@
+artifacts_root: artifacts
+
+
+data_ingestion:
+  root_dir: artifacts/data_ingestion
+  source_URL: https://www.kaggle.com/datasets/uciml/default-of-credit-card-clients-dataset/UCI_Credit_Card.csv
+  raw_data_dir: artifacts/data_ingestion/raw_data
+  local_data_file: artifacts/data_ingestion/raw_data/UCI_Credit_Card.csv.zip
+  kaggle_file_path: .kaggle/kaggle.json
+  unzip_dir: artifacts/data_ingestion/unzip_data
+  ingested_train_dir: artifacts/data_ingestion/train_test/train
+  ingested_test_dir: artifacts/data_ingestion/train_test/test 
