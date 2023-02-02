@@ -1,0 +1,1 @@
+from Credit_Default.components.data_ingestion import DataIngestion
