@@ -74,5 +74,4 @@ def column_transformer(cat_features: list,num_features: list):
             ('tnf2',StandardScaler(),num_features)],
             remainder='passthrough')
     logger.info(f"Column Tranformer with OneHotEncoding on {len(cat_features)} categorical features and StandardScaler on {len(num_features)} numerical features is called.")
-
     return preprocessing
