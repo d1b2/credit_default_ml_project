@@ -1,2 +1,3 @@
 from Credit_Default.components.data_ingestion import DataIngestion
 from Credit_Default.components.data_validation import DataValidation
+from Credit_Default.components.data_preparation import DataPreparation
