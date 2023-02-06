@@ -16,3 +16,9 @@ data_validation:
   report_dir: artifacts/data_validation/report
   report_file_name: report.json
   report_page_file_name: report.html
+
+data_preparation:
+  root_dir: artifacts/data_preparation
+  clean_csv_dir: artifacts/data_preparation/clean_data
+  clean_np_dir: artifacts/data_preparation/clean_array
+  
