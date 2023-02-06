@@ -9,6 +9,8 @@ from box import ConfigBox
 from pathlib import Path
 from typing import Any
 import pandas as pd
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import OneHotEncoder,StandardScaler
 
 @ensure_annotations
 def read_yaml(path_to_yaml: Path) -> ConfigBox:
@@ -57,3 +59,20 @@ def create_directories(path_to_directories: list, verbose=True):
         if verbose:
             logger.info(f"created directory at: {path}")
 
+@ensure_annotations
+def column_transformer(cat_features: list,num_features: list):
+    """column transformer  
+    Args:
+        cat_features (list): list of categorical features of dataframe
+        num_features (list): list of numerical features of dataframe
+        
+    Returns:
+        preprocessing: column transformer
+    """
+    preprocessing=ColumnTransformer(transformers=[
+            ('tnf1',OneHotEncoder(drop='first',sparse=False, handle_unknown='ignore'), cat_features),
+            ('tnf2',StandardScaler(),num_features)],
+            remainder='passthrough')
+    logger.info(f"Column Tranformer with OneHotEncoding on {len(cat_features)} categorical features and StandardScaler on {len(num_features)} numerical features is called.")
+
+    return preprocessing
