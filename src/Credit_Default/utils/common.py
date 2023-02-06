@@ -9,6 +9,7 @@ from box import ConfigBox
 from pathlib import Path
 from typing import Any
 import pandas as pd
+
 @ensure_annotations
 def read_yaml(path_to_yaml: Path) -> ConfigBox:
     """reads yaml file and returns
