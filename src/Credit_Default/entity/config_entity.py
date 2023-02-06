@@ -18,3 +18,9 @@ class DataValidationConfig:
     report_dir: Path
     report_file_name: str
     report_page_file_name: str
+
+@dataclass(frozen=True)
+class DataPreparationConfig:
+    root_dir: Path
+    clean_csv_dir: Path
+    clean_np_dir: Path
