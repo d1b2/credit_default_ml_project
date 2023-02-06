@@ -1,6 +1,6 @@
 from Credit_Default.constants import *
 from Credit_Default.utils import *
-from Credit_Default.entity import DataIngestionConfig,DataValidationConfig
+from Credit_Default.entity import DataIngestionConfig,DataValidationConfig,DataPreparationConfig
 
 class ConfigurationManager:
     def __init__(
@@ -49,3 +49,18 @@ class ConfigurationManager:
         )
 
         return data_validation_config
+
+    def get_data_preparation_config(self) -> DataPreparationConfig:
+        config = self.config.data_preparation
+        
+        create_directories([config.root_dir,
+                            config.clean_csv_dir,
+                            config.clean_np_dir])
+
+        data_preparation_config = DataPreparationConfig(
+            root_dir = Path(config.root_dir),           
+            clean_csv_dir = Path(config.clean_csv_dir),
+            clean_np_dir = Path(config.clean_np_dir)
+        )
+
+        return data_preparation_config
