@@ -11,3 +11,10 @@ class DataIngestionConfig:
     unzip_dir: Path
     ingested_train_dir: Path
     ingested_test_dir: Path
+
+@dataclass(frozen=True)
+class DataValidationConfig:
+    root_dir: Path
+    report_dir: Path
+    report_file_name: str
+    report_page_file_name: str
