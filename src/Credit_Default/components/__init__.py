@@ -2,3 +2,4 @@ from Credit_Default.components.data_ingestion import DataIngestion
 from Credit_Default.components.data_validation import DataValidation
 from Credit_Default.components.data_preparation import DataPreparation
 from Credit_Default.components.model_training import ModelTraining
+from Credit_Default.components.model_tuning import ModelTuning
