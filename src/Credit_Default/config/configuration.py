@@ -1,6 +1,6 @@
 from Credit_Default.constants import *
 from Credit_Default.utils import *
-from Credit_Default.entity import DataIngestionConfig,DataValidationConfig,DataPreparationConfig,ModelTrainingConfig
+from Credit_Default.entity import *
 
 class ConfigurationManager:
     def __init__(
@@ -79,3 +79,16 @@ class ConfigurationManager:
         )
 
         return model_training_config
+    
+    def get_model_tuning_config(self) -> ModelTuningConfig:
+        config = self.config.model_tuning
+        
+        create_directories([config.root_dir])
+
+        model_tuning_config = ModelTuningConfig(
+            root_dir = Path(config.root_dir), 
+            model_scores = str(config.model_scores),
+            model_name = str(config.model_name)
+        )
+
+        return model_tuning_config
