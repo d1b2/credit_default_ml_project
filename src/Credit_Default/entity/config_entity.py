@@ -24,3 +24,10 @@ class DataPreparationConfig:
     root_dir: Path
     clean_csv_dir: Path
     clean_np_dir: Path
+
+@dataclass(frozen=True)
+class ModelTrainingConfig:
+    root_dir: Path
+    base_accuracy: float
+    model_df_dir: Path
+    model_df_name: str
