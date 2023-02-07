@@ -31,3 +31,9 @@ class ModelTrainingConfig:
     base_accuracy: float
     model_df_dir: Path
     model_df_name: str
+
+@dataclass(frozen=True)
+class ModelTuningConfig:
+    root_dir: Path
+    model_scores: str
+    model_name: str

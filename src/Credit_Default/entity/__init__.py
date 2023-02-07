@@ -1,1 +1,2 @@
-from Credit_Default.entity.config_entity import DataIngestionConfig,DataValidationConfig,DataPreparationConfig,ModelTrainingConfig
+from Credit_Default.entity.config_entity import DataIngestionConfig,DataValidationConfig,DataPreparationConfig
+from Credit_Default.entity.config_entity import ModelTrainingConfig,ModelTuningConfig
