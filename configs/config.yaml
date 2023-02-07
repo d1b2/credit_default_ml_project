@@ -27,4 +27,9 @@ model_training:
   base_accuracy: 0.75
   model_df_dir: artifacts/model_training/model_scores
   model_df_name: model.csv
+
+model_tuning:
+  root_dir: artifacts/model_tuning
+  model_scores: scores.json
+  model_name: model.pkl
   
