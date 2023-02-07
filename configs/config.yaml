@@ -21,4 +21,10 @@ data_preparation:
   root_dir: artifacts/data_preparation
   clean_csv_dir: artifacts/data_preparation/clean_data
   clean_np_dir: artifacts/data_preparation/clean_array
+
+model_training:
+  root_dir: artifacts/model_training
+  base_accuracy: 0.75
+  model_df_dir: artifacts/model_training/model_scores
+  model_df_name: model.csv
   
