@@ -11,7 +11,7 @@ from typing import Any
 import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder,StandardScaler
-from sklearn.metrics import roc_auc_score,accuracy_score
+from sklearn.metrics import roc_auc_score,accuracy_score,mean_squared_error
 
 @ensure_annotations
 def read_yaml(path_to_yaml: Path) -> ConfigBox:
@@ -77,6 +77,7 @@ def column_transformer(cat_features: list,num_features: list):
     logger.info(f"Column Tranformer with OneHotEncoding on {len(cat_features)} categorical features and StandardScaler on {len(num_features)} numerical features is called.")
     return preprocessing
 
+@ensure_annotations
 def model_score(train_array,test_array,model):
     """accuracy score and auc score of model
     Args:
@@ -86,10 +87,28 @@ def model_score(train_array,test_array,model):
     Returns:
         accuracy (float) : accuracy score of model
         auc (float) : roc_auc score of model
+        err (float) : mean square error of model
     """
     x_train,y_train,x_test,y_test = train_array[:,:-1],train_array[:,-1],test_array[:,:-1],test_array[:,-1]
     model.fit(x_train,y_train)
     accuracy=round(accuracy_score(y_test, model.predict(x_test)),2)
     auc=round(roc_auc_score(y_test, model.predict_proba(x_test)[:, 1]),2)
-    logger.info(f"Model :{str(model)} Accuracy Score :{accuracy} ROC_AUC Score :{auc}")
-    return accuracy,auc
+    err=round(mean_squared_error(y_test, model.predict(x_test)),2)
+    logger.info(f"Model :{str(model)} Accuracy Score :{accuracy} ROC_AUC Score :{auc} MSE :{err}")
+    return accuracy,auc,err
+
+@ensure_annotations
+def write_yaml(path_to_yaml: Path,data:dict=None):
+    """Write dictionary to yaml file 
+    Args:
+        path_to_yaml (str): path of yaml
+        data (dict) : data to written in yaml file
+   
+    """ 
+    try:         
+        with open(path_to_yaml,"w") as yaml_file:
+            if data is not None:
+                yaml.dump(data,yaml_file)
+        logger.info(f"yaml file: {path_to_yaml} written successfully")  
+    except Exception as e:
+        raise e

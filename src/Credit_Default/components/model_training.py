@@ -18,6 +18,7 @@ class ModelTraining:
         self.model_name=[]
         self.accuracy_score=[]
         self.auc_score=[]
+        self.mse=[]
 
     def logistic_regression_model(self):
         try:
@@ -26,6 +27,7 @@ class ModelTraining:
             score=model_score(self.train_array,self.test_array,model)
             self.accuracy_score.append(score[0])
             self.auc_score.append(score[1])
+            self.mse.append(score[-1])
             
         except Exception as e:
             raise e
@@ -37,6 +39,7 @@ class ModelTraining:
             score=model_score(self.train_array,self.test_array,model)
             self.accuracy_score.append(score[0])
             self.auc_score.append(score[1])
+            self.mse.append(score[-1])
         except Exception as e:
             raise e
     
@@ -48,6 +51,7 @@ class ModelTraining:
             score=model_score(self.train_array,self.test_array,model)
             self.accuracy_score.append(score[0])
             self.auc_score.append(score[1])
+            self.mse.append(score[-1])
         except Exception as e:
             raise e
     
@@ -56,7 +60,8 @@ class ModelTraining:
             models = pd.DataFrame({
                 'Model' : self.model_name,    
                 'Accucracy_score' : self.accuracy_score,
-                'ROC_AUC_Score' : self.auc_score})
+                'ROC_AUC_Score' : self.auc_score,
+                'MSE' : self.mse})
             models['Above_Base_Accuracy']= [True if  models['Accucracy_score'][i] >= self.config.base_accuracy  else False for i in range(len(models))]
             
             model_df_filepath = os.path.join(self.config.model_df_dir,self.config.model_df_name)
