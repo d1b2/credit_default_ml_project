@@ -11,6 +11,7 @@ from typing import Any
 import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder,StandardScaler
+from sklearn.metrics import roc_auc_score,accuracy_score
 
 @ensure_annotations
 def read_yaml(path_to_yaml: Path) -> ConfigBox:
@@ -75,3 +76,20 @@ def column_transformer(cat_features: list,num_features: list):
             remainder='passthrough')
     logger.info(f"Column Tranformer with OneHotEncoding on {len(cat_features)} categorical features and StandardScaler on {len(num_features)} numerical features is called.")
     return preprocessing
+
+def model_score(train_array,test_array,model):
+    """accuracy score and auc score of model
+    Args:
+        train_array (numpy array) : array of training dataset
+        test_array  (numpy array) : array of testing dataset
+        model (sklearn model)     : machine learning model
+    Returns:
+        accuracy (float) : accuracy score of model
+        auc (float) : roc_auc score of model
+    """
+    x_train,y_train,x_test,y_test = train_array[:,:-1],train_array[:,-1],test_array[:,:-1],test_array[:,-1]
+    model.fit(x_train,y_train)
+    accuracy=round(accuracy_score(y_test, model.predict(x_test)),2)
+    auc=round(roc_auc_score(y_test, model.predict_proba(x_test)[:, 1]),2)
+    logger.info(f"Model :{str(model)} Accuracy Score :{accuracy} ROC_AUC Score :{auc}")
+    return accuracy,auc
