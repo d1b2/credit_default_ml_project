@@ -1,7 +1,8 @@
 # Machine Learning Project
 
-Flask application demo
-<img src="app/static/app_demo.gif" width="500" height="500"> 
+### Flask application demo
+
+<img src="app/static/app_demo.gif" width="500" height="300"> 
 
 ### Software and Account Requirement
 
