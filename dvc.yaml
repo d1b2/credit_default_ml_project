@@ -1,0 +1,71 @@
+stages:
+  data_ingestion:
+    cmd: python src/Credit_Default/pipeline/st_01_data_ingestion.py
+    deps:
+      - src/Credit_Default/pipeline/st_01_data_ingestion.py
+      - .kaggle/kaggle.json
+    outs:
+      - artifacts/data_ingestion/raw_data/UCI_Credit_Card.csv.zip
+      - artifacts/data_ingestion/unzip_data/UCI_Credit_Card.csv
+      - artifacts/data_ingestion/train_test/train/train.csv
+      - artifacts/data_ingestion/train_test/test/test.csv
+
+
+  data_validation:
+    cmd: python src/Credit_Default/pipeline/st_02_data_validation.py
+    deps:
+      - src/Credit_Default/pipeline/st_02_data_validation.py
+      - configs/config.yaml
+      - configs/schema.yaml
+      - artifacts/data_ingestion/train_test/train/train.csv
+      - artifacts/data_ingestion/train_test/test/test.csv
+
+    outs:
+      - artifacts/data_validation/report/report.html
+      - artifacts/data_validation/report/report.json
+
+
+  data_preparation:
+    cmd: python src/Credit_Default/pipeline/st_03_data_preparation.py
+    deps:
+      - src/Credit_Default/pipeline/st_03_data_preparation.py
+      - configs/config.yaml
+      - configs/schema_clean.yaml
+      - artifacts/data_ingestion/train_test/train/train.csv
+      - artifacts/data_ingestion/train_test/test/test.csv
+ 
+    outs:
+      - artifacts/data_preparation/clean_array/test_array.npy
+      - artifacts/data_preparation/clean_array/train_array.npy
+      - artifacts/data_preparation/clean_data/test.csv
+      - artifacts/data_preparation/clean_data/train.csv
+      - artifacts/data_preparation/transformer.pkl
+
+  
+  model_training:
+    cmd: python src/Credit_Default/pipeline/st_04_model_training.py
+    deps:
+      - src/Credit_Default/pipeline/st_04_model_training.py
+      - configs/config.yaml
+      -  artifacts/data_preparation/clean_array/test_array.npy
+      - artifacts/data_preparation/clean_array/train_array.npy
+    outs:
+      - artifacts/model_training/model_scores/model.csv
+
+  model_tuning:
+    cmd: python src/Credit_Default/pipeline/st_05_model_tuning.py
+    deps:
+      - src/Credit_Default/pipeline/st_05_model_tuning.py
+      - configs/config.yaml
+      - artifacts/data_preparation/clean_array/test_array.npy
+      - artifacts/data_preparation/clean_array/train_array.npy
+      - artifacts/model_training/model_scores/model.csv
+    outs:
+      - artifacts/model_tuning/scores.json
+      - artifacts/model_tuning/model.pkl
+      - artifacts/model_tuning/pipe_model.pkl
+
+
+
+
+ 

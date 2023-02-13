@@ -1,0 +1,130 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python src/Credit_Default/pipeline/st_01_data_ingestion.py
+    deps:
+    - path: .kaggle/kaggle.json
+      md5: 4fac6482e99b986be1a68baf7a957528
+      size: 63
+    - path: src/Credit_Default/pipeline/st_01_data_ingestion.py
+      md5: 26814a88fc6cc49d762ba70435c5bc2a
+      size: 741
+    outs:
+    - path: artifacts/data_ingestion/raw_data/UCI_Credit_Card.csv.zip
+      md5: 8d7806e08f2d10e4ddf04d4d3c3e2705
+      size: 1025318
+    - path: artifacts/data_ingestion/train_test/test/test.csv
+      md5: a61f2b729480016a093d7f8efe4d7cee
+      size: 735521
+    - path: artifacts/data_ingestion/train_test/train/train.csv
+      md5: 8cc7b673ea080a202e53a1a3c0e40adf
+      size: 2941906
+    - path: artifacts/data_ingestion/unzip_data/UCI_Credit_Card.csv
+      md5: 940b416bb13a9b24bb5c9e1589284005
+      size: 2862995
+  data_validation:
+    cmd: python src/Credit_Default/pipeline/st_02_data_validation.py
+    deps:
+    - path: artifacts/data_ingestion/train_test/test/test.csv
+      md5: a61f2b729480016a093d7f8efe4d7cee
+      size: 735521
+    - path: artifacts/data_ingestion/train_test/train/train.csv
+      md5: 8cc7b673ea080a202e53a1a3c0e40adf
+      size: 2941906
+    - path: configs/config.yaml
+      md5: 1c131b6fdc86188169bbeb98e610315b
+      size: 1170
+    - path: configs/schema.yaml
+      md5: af1ba543ba4073f60cac404522a50237
+      size: 998
+    - path: src/Credit_Default/pipeline/st_02_data_validation.py
+      md5: 4dfee6d0aa5ceddb1b03ad487a6d3bc8
+      size: 904
+    outs:
+    - path: artifacts/data_validation/report/report.html
+      md5: 68de5d37aed04886695254bc48e6db03
+      size: 8923607
+    - path: artifacts/data_validation/report/report.json
+      md5: 35f5c26435d91ca8b45e79532b82cad8
+      size: 62148
+  data_preparation:
+    cmd: python src/Credit_Default/pipeline/st_03_data_preparation.py
+    deps:
+    - path: artifacts/data_ingestion/train_test/test/test.csv
+      md5: a61f2b729480016a093d7f8efe4d7cee
+      size: 735521
+    - path: artifacts/data_ingestion/train_test/train/train.csv
+      md5: 8cc7b673ea080a202e53a1a3c0e40adf
+      size: 2941906
+    - path: configs/config.yaml
+      md5: 1c131b6fdc86188169bbeb98e610315b
+      size: 1170
+    - path: configs/schema_clean.yaml
+      md5: d1b853b31e987d48bfbdfc8e3c7463f9
+      size: 794
+    - path: src/Credit_Default/pipeline/st_03_data_preparation.py
+      md5: b41605323b2b417b04aca712ad73965f
+      size: 1131
+    outs:
+    - path: artifacts/data_preparation/clean_array/test_array.npy
+      md5: ac331d4867daafa2d477ecdfa1a3b5b4
+      size: 5429952
+    - path: artifacts/data_preparation/clean_array/train_array.npy
+      md5: 74bf80560a88f339a670df1577456658
+      size: 21734224
+    - path: artifacts/data_preparation/clean_data/test.csv
+      md5: 2f087dce937242cf6cc472fe21a2cb9d
+      size: 1469927
+    - path: artifacts/data_preparation/clean_data/train.csv
+      md5: 8db9a045cb35934f2181d8e2cc215be5
+      size: 5877289
+    - path: artifacts/data_preparation/transformer.pkl
+      md5: 01c8684936c2ce49a1aea58f98dd59d3
+      size: 3054
+  model_training:
+    cmd: python src/Credit_Default/pipeline/st_04_model_training.py
+    deps:
+    - path: artifacts/data_preparation/clean_array/test_array.npy
+      md5: ac331d4867daafa2d477ecdfa1a3b5b4
+      size: 5429952
+    - path: artifacts/data_preparation/clean_array/train_array.npy
+      md5: 74bf80560a88f339a670df1577456658
+      size: 21734224
+    - path: configs/config.yaml
+      md5: 1c131b6fdc86188169bbeb98e610315b
+      size: 1170
+    - path: src/Credit_Default/pipeline/st_04_model_training.py
+      md5: 33655622457f34f26b315e603843a1dc
+      size: 831
+    outs:
+    - path: artifacts/model_training/model_scores/model.csv
+      md5: d7e298d2c0052f3c7bfa4767b9fa9b4a
+      size: 184
+  model_tuning:
+    cmd: python src/Credit_Default/pipeline/st_05_model_tuning.py
+    deps:
+    - path: artifacts/data_preparation/clean_array/test_array.npy
+      md5: ac331d4867daafa2d477ecdfa1a3b5b4
+      size: 5429952
+    - path: artifacts/data_preparation/clean_array/train_array.npy
+      md5: 74bf80560a88f339a670df1577456658
+      size: 21734224
+    - path: artifacts/model_training/model_scores/model.csv
+      md5: d7e298d2c0052f3c7bfa4767b9fa9b4a
+      size: 184
+    - path: configs/config.yaml
+      md5: 1c131b6fdc86188169bbeb98e610315b
+      size: 1170
+    - path: src/Credit_Default/pipeline/st_05_model_tuning.py
+      md5: b9c67247773c22c86be79eccb97cc058
+      size: 841
+    outs:
+    - path: artifacts/model_tuning/model.pkl
+      md5: 06a71320503551ed86868badd0982eeb
+      size: 9379491
+    - path: artifacts/model_tuning/pipe_model.pkl
+      md5: 9b22a58e1602fb60ce82f88f2d116488
+      size: 8916584
+    - path: artifacts/model_tuning/scores.json
+      md5: 9beca38153750c75b4ae7854760cef13
+      size: 120
