@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    body {
+    background-image: url('/static/background.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;  
+    background-size: cover; 
+    
+    
+  }
+  /* Float four columns side by side */
+.column {
+  float: left;
+  width: 700px;
+  padding: 0px 8px;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {margin: 0 -5px;}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 500px) {
+  .column {
+    width: 600px;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+  </style>
+ <title></title>
+</head>
+<body>
+    <b><div style="padding: 0px 200px;font-size: 30px; text-align:center;" ><h2>Credit Card Default Prediction</h2></b></div>
+    <div class="row">
+        <div class="column" style="padding: 0px 0px; font-size: 15px;" >
+            <div style="padding: 0px 100px;">
+                <table style="border:1px solid #000;padding: 10px 20px;background-color: lightblue;">
+                {% for value in values %}
+                    <tr><td><b>Features</b></td> <td><b>&emsp;User Inputs</b></td></tr>
+                    <tr><td>Credit Given</td> <td>&emsp;{{ value[0] }}</td></tr>
+                    <tr><td>Gender </td> <td> &emsp;{{ value[1] }}</td></tr>
+                    <tr><td>Education </td> <td>&emsp;{{ value[2] }}</td></tr>
+                    <tr><td>Marital Status</td> <td>&emsp;{{ value[3] }}</td></tr>
+                    <tr><td>Repayment Status of </td> <td></td></tr>
+                    <tr><td>&emsp;&emsp;&emsp;&emsp;Current Month </td> <td>&emsp;{{ value[4] }}</td></tr>
+                    <tr><td>&emsp;&emsp;&emsp;&emsp;Last Month </td> <td>&emsp;{{ value[5] }}</td></tr>
+                    <tr><td>&emsp;&emsp;&emsp;&emsp;Second Last Month </td> <td>&emsp;{{ value[6] }}</td></tr>
+                    <tr><td>&emsp;&emsp;&emsp;&emsp;Third Last Month </td> <td> &emsp;{{ value[7] }}</td></tr>
+                    <tr><td>&emsp;&emsp;&emsp;&emsp;Forth Last Month </td> <td>&emsp;{{ value[8] }}</td></tr>
+                    <tr><td>&emsp;&emsp;&emsp;&emsp;Fifth Last Month </td> <td> &emsp;{{ value[9] }}</td></tr>
+                    <tr><td>Bill Amount of</td> <td></td></tr>
+                    <tr><td>&emsp;&emsp;&emsp;&emsp;Current Month </td> <td>&emsp;{{ value[10] }}</td></tr>
+                    <tr><td>&emsp;&emsp;&emsp;&emsp;Last Month </td> <td>&emsp;{{ value[11] }}</td></tr>
+                    <tr><td>&emsp;&emsp;&emsp;&emsp;Second Last Month </td> <td>&emsp;{{ value[12] }}</td></tr>
+                    <tr><td>&emsp;&emsp;&emsp;&emsp;Third Last Month </td> <td>&emsp;{{ value[13] }}</td></tr>
+                    <tr><td>&emsp;&emsp;&emsp;&emsp;Forth Last Month </td> <td>&emsp;{{ value[14] }}</td></tr>
+                    <tr><td>&emsp;&emsp;&emsp;&emsp;Fifth Last Month</td> <td>&emsp;{{ value[15] }}</td></tr>
+                    <tr><td>Amount Repayed in </td> <td></td></tr>
+                    <tr><td>&emsp;&emsp;&emsp;&emsp;Current Month </td> <td>&emsp;{{ value[16] }}</td></tr>
+                    <tr><td>&emsp;&emsp;&emsp;&emsp;Last Month </td> <td>&emsp;{{ value[17] }}</td></tr>
+                    <tr><td>&emsp;&emsp;&emsp;&emsp;Second Last Month </td> <td>&emsp;{{ value[18] }}</td></tr>
+                    <tr><td>&emsp;&emsp;&emsp;&emsp;Third Last Month </td> <td>&emsp;{{ value[19] }}</td></tr>
+                    <tr><td>&emsp;&emsp;&emsp;&emsp;Forth Last Month </td> <td>&emsp;{{ value[20] }}</td></tr>
+                    <tr><td>&emsp;&emsp;&emsp;&emsp;Fifth Last Month </td> <td>&emsp;{{ value[21] }}</td></tr>
+                
+                
+                
+                {% endfor %}
+                </table>
+                </div>
+    
+        </div>
+
+
+    <div class="column" style="padding: 10px 50px; font-size: 15px;" >
+        {% if prediction_text == 1 %}
+    <table >
+        <tr><td>&emsp;</td> 
+            <td> &emsp;&emsp; &emsp;&emsp; &emsp;&emsp;
+                &emsp;&emsp;<img src='static\default.png' style="width:300px;height:300px;">       
+            <div style="font-size: 25px;">
+                <h3>This person will default payment next month</h3></div>
+            </td>
+        </tr>
+      
+    
+     </table>
+     
+    {% else%}
+    <table ><tr><td>&emsp;</td> 
+        <td> &emsp;&emsp; &emsp;&emsp; &emsp;&emsp;
+            &emsp;&emsp;<img src='static\not_default.png'style="width:300px;height:300px;">
+    <div style="font-size: 25px;">
+    <h3>This person will not default payment next month</h3></div>
+</td>
+</tr>
+</table>
+    {%endif%}
+</div>
+</div>
+<br>
+<a style="padding: 0px 10px; " href='/'>Go back to Predict Page</a>
+<div style="padding: 5px 0px;text-align:center;">
+    Made By: Dhruv Bakshi
+    
+</div>
+</body>
+</html>

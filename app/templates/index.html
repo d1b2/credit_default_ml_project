@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Times New Roman,Wingdings 3 ,Helvetica, sans-serif;
+}
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 376px;
+  padding: 0 8px;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {margin: 0 -5px;}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 600px;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: lightblue;
+  
+}
+body {
+  background-image: url('/static/background.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;  
+  background-size: cover;
+
+  
+  
+}
+</style>
+</head>
+<body><div style="padding: 0px 12px;text-align:center;font-size: 30px; " ><h2>Credit Card Default Prediction</h2></div>
+
+<form action="{{ url_for('predict')}}"method="post">
+
+<div class="row">
+<div class="column" style="padding: 0px 12px; font-size: 15px;" >
+<br><br><br><br>
+<h3>Want to detect whether the person will default on credit card payments next month? <br> <br>Then please fill the adjacent form and press predict button. 
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;➤➤➤➤</h3> </div>
+  <div class="column">
+    <div class="card">
+      <h3>Basic Information</h3>
+      <table>
+<tr><td>&emsp;&emsp;</td> <td></td></tr>
+        <tr><td>Credit Given</td><td><input type="text" name="LIMIT_BAL" placeholder="LIMIT_BAL" required="required" style="padding: 0px 12px;text-align:left;" /></td></tr>
+          <tr><td></td> <td></td></tr>
+        <tr><td>Gender</td><td><select name="SEX" required="required" style="padding: 5px 60px;text-align:left;">
+          <option value="">Select</option>
+          <option value="1">Male</option>
+          <option value="2">Female</option>         										
+        </select></td></tr>
+	<tr><td>Education</td><td><select name="EDUCATION" required="required" style="padding: 5px 26px;text-align:left;">
+          <option value="">Select Qualification</option>
+          <option value="1">Graduate School</option>
+          <option value="2">University</option>
+          <option value="3">High School</option>
+          <option value="4">Others</option>          										
+        </select></td></tr>
+	<tr><td>Marital Status</td><td><select name="MARRIAGE" required="required" style="padding: 5px 60px;text-align:left;">
+          <option value="">Select</option>
+          <option value="1">Married</option>
+          <option value="2">Single</option>
+          <option value="3">Others</option>          										
+        </select></td></tr>
+<tr><td>&emsp;&emsp;</td> <td></td></tr>
+<tr><td>&emsp;&emsp;</td> <td></td></tr>
+
+	
+
+
+        
+      </table>
+      
+
+
+
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card">
+      <h3>Repayment Status</h3>
+      <table>
+        
+          
+        <tr><td>Current Month</td><td><select name="PAY_0"  required="required"style="padding: 5px 23px;text-align:left;">
+          <option value="">Select</option>
+          <option value="-1">Duly Paid</option>
+          <option value="1">One month delay</option>
+          <option value="2">Two months delay</option>
+          <option value="3">Three months delay</option>
+          <option value="4">Four months delay</option>
+          <option value="5">Five month delay</option>
+          <option value="6">Six months delay</option>
+          <option value="7">Seven month delay</option>
+          <option value="8">Eight months delay</option>          										
+        </select></td></tr>
+	<tr><td>Last Month</td><td><select name="PAY_2"  required="required" style="padding: 5px 23px;text-align:left;"/>
+            <option value="">Select</option>
+            <option value="-1">Duly Paid</option>
+            <option value="1">One month delay</option>
+            <option value="2">Two months delay</option>
+            <option value="3">Three months delay</option>
+            <option value="4">Four months delay</option>
+            <option value="5">Five month delay</option>
+            <option value="6">Six months delay</option>
+            <option value="7">Seven month delay</option>
+            <option value="8">Eight months delay</option>          										
+          </select></td></tr>
+	<tr><td>Second Last Month</td><td><select name="PAY_3"  required="required" style="padding: 5px 23px;text-align:left;"/>
+            <option value="">Select</option>
+            <option value="-1">Duly Paid</option>
+            <option value="1">One month delay</option>
+            <option value="2">Two months delay</option>
+            <option value="3">Three months delay</option>
+            <option value="4">Four months delay</option>
+            <option value="5">Five month delay</option>
+            <option value="6">Six months delay</option>
+            <option value="7">Seven month delay</option>
+            <option value="8">Eight months delay</option>          										
+          </select></td></tr>
+	<tr><td>Third Last Month</td><td><select name="PAY_4"  required="required" style="padding: 5px 23px;text-align:left;"/>
+            <option value="">Select</option>
+            <option value="-1">Duly Paid</option>
+            <option value="1">One month delay</option>
+            <option value="2">Two months delay</option>
+            <option value="3">Three months delay</option>
+            <option value="4">Four months delay</option>
+            <option value="5">Five month delay</option>
+            <option value="6">Six months delay</option>
+            <option value="7">Seven month delay</option>
+            <option value="8">Eight months delay</option>          										
+          </select></td></tr>
+	<tr><td>Forth Last Month</td><td><select name="PAY_5"  required="required" style="padding: 5px 23px;text-align:left;"/>
+            <option value="">Select</option>
+            <option value="-1">Duly Paid</option>
+            <option value="1">One month delay</option>
+            <option value="2">Two months delay</option>
+            <option value="3">Three months delay</option>
+            <option value="4">Four months delay</option>
+            <option value="5">Five month delay</option>
+            <option value="6">Six months delay</option>
+            <option value="7">Seven month delay</option>
+            <option value="8">Eight months delay</option>          										
+          </select></td></tr>
+	<tr><td>Fifth Last Month</td><td><select name="PAY_6"  required="required" style="padding: 5px 23px;text-align:left;"/>
+            <option value="">Select</option>
+            <option value="-1">Duly Paid</option>
+            <option value="1">One month delay</option>
+            <option value="2">Two months delay</option>
+            <option value="3">Three months delay</option>
+            <option value="4">Four months delay</option>
+            <option value="5">Five month delay</option>
+            <option value="6">Six months delay</option>
+            <option value="7">Seven month delay</option>
+            <option value="8">Eight months delay</option>          										
+          </select></td></tr>
+        
+        
+      </table>
+      
+      
+      </div>
+  </div>
+<div class="column">
+   <br><br><br><br><br><br><br><br> 
+<button type="submit" class="btn btn-primary btn-block btn-large"                                                         
+      style="display:block; margin: 0 auto;text-align:center; font-size: 24px; 
+            padding: 70px; padding-top: 10px;padding-bottom: 10px;
+            background-color:blue; border-color: #8D8D8D; color: white; 
+            border-radius: 12px;">Predict</button>
+    
+  </div>  
+</div>
+<br><br>
+<div class="row">
+<div class="column">&emsp;&emsp;&emsp;&emsp;
+</div>
+  <div class="column">
+    <div class="card">
+      <h3>Bill Amount</h3>
+        <table>
+        
+          
+        <tr><td>Current Month</td><td><input type="text" name="BILL_AMT1" placeholder="BILL_AMT1" required="required" /></td></tr>
+	<tr><td>Last Month</td><td><input type="text" name="BILL_AMT2" placeholder="BILL_AMT2" required="required" /></td></tr>
+	<tr><td>Second Last Month</td><td><input type="text" name="BILL_AMT3" placeholder="BILL_AMT3" required="required" /></td></tr>
+	<tr><td>Third Last Month</td><td><input type="text" name="BILL_AMT4" placeholder="BILL_AMT4" required="required" /></td></tr>
+	<tr><td>Forth Last Month</td><td><input type="text" name="BILL_AMT5" placeholder="BILL_AMT5" required="required" /></td></tr>
+	<tr><td>Fifth Last Month</td><td><input type="text" name="BILL_AMT6" placeholder="BILL_AMT5" required="required" /></td></tr>
+        
+        
+      </table>
+      
+    </div>
+  </div>
+  
+  <div class="column">
+    <div class="card">
+      <h3>Amount Repayed</h3>
+      <table>
+        
+          
+        <tr><td>Current Month</td><td><input type="text" name="PAY_AMT1" placeholder="PAY_AMT1" required="required" /></td></tr>
+	<tr><td>Last Month</td><td><input type="text" name="PAY_AMT2" placeholder="PAY_AMT2" required="required" /></td></tr>
+	<tr><td>Second Last Month</td><td><input type="text" name="PAY_AMT3" placeholder="PAY_AMT3" required="required" /></td></tr>
+	<tr><td>Third Last Month</td><td><input type="text" name="PAY_AMT4" placeholder="PAY_AMT4" required="required" /></td></tr>
+	<tr><td>Forth Last Month</td><td><input type="text" name="PAY_AMT5" placeholder="PAY_AMT5" required="required" /></td></tr>
+	<tr><td>Fifth Last Month</td><td><input type="text" name="PAY_AMT6" placeholder="PAY_AMT6" required="required" /></td></tr>
+        
+        
+      </table>
+    </div>
+  </div>
+<div class="column">
+   <br><br><br><br><br><br><br><br><br><br><br><br> 
+
+    
+  </div>
+</div>
+</form>
+<footer style="padding: 5px 23px;text-align:center;">
+  <p>Made By: Dhruv Bakshi<br>
+  </p>
+</footer>
+</body>
+</html>
