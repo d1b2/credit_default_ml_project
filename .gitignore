@@ -137,3 +137,6 @@ kaggle.json
 
 #artifacts
 artifacts/
+
+#pickle files
+*.pkl
