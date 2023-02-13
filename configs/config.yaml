@@ -24,7 +24,7 @@ data_preparation:
 
 model_training:
   root_dir: artifacts/model_training
-  base_accuracy: 0.75
+  base_accuracy: 0.78
   model_df_dir: artifacts/model_training/model_scores
   model_df_name: model.csv
 
