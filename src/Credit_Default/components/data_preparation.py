@@ -11,6 +11,7 @@ from imblearn.over_sampling import SMOTE
 from sklearn.preprocessing import OneHotEncoder,StandardScaler
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder,StandardScaler
+import pickle
 
 
 class DataPreparation:
@@ -43,12 +44,29 @@ class DataPreparation:
             logger.info(f"MARRIAGE column cleaned in train and test dataset.")
         except Exception as e:
             raise e
+    def clean_repayment_status(self):
+        try:
+            for i in range(6,12):
+                self.train.iloc[(self.train.iloc[:,i] == 0) | (self.train.iloc[:,i] == -2), i] = -1
+                self.test.iloc[(self.test.iloc[:,i] == 0) | (self.test.iloc[:,i] == -2), i] = -1
+            logger.info(f"Repayment Status columns cleaned in train and test dataset.")
+
+        except Exception as e:
+            raise e
 
     def rename_target(self):
         try:
             self.train.rename(columns={'default.payment.next.month':'DEFAULTER'},inplace=True)
             self.test.rename(columns={'default.payment.next.month':'DEFAULTER'},inplace=True)
             logger.info(f"Target column renamed to DEFAULTER in train and test dataset.")
+        except Exception as e:
+            raise e
+    
+    def delete_columns(self):
+        try:
+            self.train.drop(['ID','AGE'], axis=1,inplace=True)
+            self.test.drop(['ID','AGE'], axis=1,inplace=True)
+            logger.info(f'ID and AGE column deleted from train and test dataset.')
         except Exception as e:
             raise e
 
@@ -62,20 +80,30 @@ class DataPreparation:
             logger.info(f'Original Train dataset shape: {len(train_df)}|Resampled Train dataset shape :{len(y_train_smote)}')
            
             logger.info(f'Original Test dataset shape: {len(test_df)}|Resampled Test dataset shape :{len(y_test_smote)}')
-         
-
             columns = list(train_df.columns)
             columns.pop()
 
             self.train = pd.DataFrame(x_train_smote, columns=columns)
             self.train['DEFAULTER'] = y_train_smote
-            self.train.drop(['ID','AGE'], axis=1,inplace=True)
             self.test = pd.DataFrame(x_test_smote, columns=columns)
             self.test['DEFAULTER'] = y_test_smote
-            self.test.drop(['ID','AGE'], axis=1,inplace=True)
-            logger.info(f'ID and AGE column deleted from train and test dataset.')
+         
         except Exception as e:
             raise e
+    
+    def drop_duplicates(self):
+        try: 
+            train_duplicate = self.train[self.train.duplicated()]
+            test_duplicate = self.test[self.test.duplicated()]
+            if len(train_duplicate)> 0 :
+                logger.info(f'{len(train_duplicate)} duplicate deleted from train dataset.')
+                self.train.drop_duplicates(inplace=True)
+            if len(test_duplicate)>0:
+                logger.info(f'{len(test_duplicate)} duplicate deleted from test dataset.')
+                self.test.drop_duplicates(inplace=True)
+        except Exception as e:
+            raise e
+        
 
     def saving_resampled_and_clean_csv(self):
         try:
@@ -83,10 +111,25 @@ class DataPreparation:
             test_file_path = os.path.join(self.config.clean_csv_dir,"test.csv")
             self.train.to_csv(train_file_path,index=False)
             self.test.to_csv(test_file_path,index=False)
-            logger.info(f'Saving clean train and test csv files')
+            logger.info(f'Saving clean train: {len(self.train)} rows and test: {len(self.test)} rows in csv files')
             pass
         except Exception as e:
             raise e
+    
+    def saving_column_transformer(self):
+        try:
+            num_features = list(self.clean_schema["numerical_features"].split(" "))
+            cat_features = list(self.clean_schema["categorical_features"].split(" "))
+            target_column = self.clean_schema["target_column"] 
+            preprocessing= column_transformer(cat_features,num_features)           
+            x_train= self.train.drop(target_column,axis=1)
+            preprocessing.fit(x_train)
+            transformer=os.path.join(self.config.root_dir,"transformer.pkl")
+            pickle.dump(preprocessing, open(transformer, 'wb'))
+            logger.info(f'Saving column transformer')
+        except Exception as e:
+                raise e
+
 
     def saving_clean_np_array(self):
         try:

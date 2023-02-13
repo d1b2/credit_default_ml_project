@@ -11,9 +11,13 @@ def main():
     data_preparation.null_checks()
     data_preparation.clean_education()
     data_preparation.clean_marriage()
+    data_preparation.clean_repayment_status()
     data_preparation.rename_target()
+    data_preparation.delete_columns()
     data_preparation.smote_resampling()
+    data_preparation.drop_duplicates()
     data_preparation.saving_resampled_and_clean_csv()
+    data_preparation.saving_column_transformer()
     data_preparation.saving_clean_np_array()
 
 if __name__ == '__main__':
