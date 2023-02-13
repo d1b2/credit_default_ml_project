@@ -12,6 +12,7 @@ def main():
     model_tuning.model_tuning_and_saving_parameters()
     model_tuning.saving_model_scores()
     model_tuning.saving_model()
+    model_tuning.saving_model_pipeline()
 
 
 
