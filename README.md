@@ -17,7 +17,7 @@
 <img src="app/static/app_demo.gif" width="500" height="300"> 
 
 ## Stage Codeflow
-<img src="https://github.com/d1b2/credit_default_ml_project/blob/main/app/static/satge_codeflow.png">
+<img src="https://github.com/d1b2/credit_default_ml_project/blob/main/app/static/satges_codeflow.png">
 
 
 ## 💻 Setup
