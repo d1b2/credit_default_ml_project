@@ -1,4 +1,4 @@
-
+import time
 from flask import Flask,render_template
 import pickle
 
@@ -17,15 +17,18 @@ def predict():
     For rendering results on HTML GUI
     '''
     try:
-        inputs=get_user_input_dataframe()      
-        
+        inputs=get_user_input_dataframe()        
+        start = time.time()
         prediction = model.predict(inputs)
+        end = time.time()
+        eval_time = round(end-start,4) # in seconds
+        
         
         output = round(prediction[0], 2)        
         value = inputs.values.tolist()
         
         value=readable_user_value(value) 
-        return render_template('results.html', prediction_text=output,values=value)
+        return render_template('results.html', prediction_text=output,values=value,response_time=eval_time)
 
     except Exception as e:
         raise e
