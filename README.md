@@ -12,6 +12,7 @@
 <a href="https://dvc.org/doc"><img src="https://img.shields.io/badge/-DVC-E65933?style=for-the-badge&logo=dvc&logoColor=2CB6CD" alt= "dvc"></a>
 <a href="https://www.evidentlyai.com/"><img src="https://img.shields.io/badge/-evidently-green?style=for-the-badge&evidently=dvc&logoColor=white" alt= "evidently"></a>
 <a href="https://jupyter.org/">  <img src="https://img.shields.io/badge/-jupyter-F7A269?style=for-the-badge&jupyter=dvc&logoColor=black" alt= "jupyter"></a>
+<a href="https://mlflow.org/">  <img src="https://img.shields.io/badge/-mlflow-1767BB?style=for-the-badge&logo=mlflow&logoColor=white" alt= "mlflow"></a>
 ## Flask application demo
 
 <img src="app/static/app_demo.gif" width="500" height="300"> 
