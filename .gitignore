@@ -140,3 +140,6 @@ artifacts/
 
 #pickle files
 *.pkl
+
+#secret
+configs/secrets.yaml
