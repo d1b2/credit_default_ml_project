@@ -4,6 +4,9 @@ import pickle
 
 from app_utils import *
 
+csv_path='app/database.csv'
+if not os.path.exists(csv_path):
+    create_records_header(csv_path)
 app = Flask(__name__)
 model = pickle.load(open('pipe_model.pkl', 'rb'))
 
@@ -28,7 +31,20 @@ def predict():
         value = inputs.values.tolist()
         
         value=readable_user_value(value) 
+        value1=value[0]
+        #dataframe=create_record_rows(csv_path,value1,output,eval_time)       
+        create_record_rows(csv_path,value1,output,eval_time) 
+        create_records_html(csv_path,"app/templates/records.html")
+        #value2=dataframe
         return render_template('results.html', prediction_text=output,values=value,response_time=eval_time)
+
+    except Exception as e:
+        raise e
+    
+@app.route('/record')
+def record():
+    try:      
+        return render_template("records.html")      
 
     except Exception as e:
         raise e
