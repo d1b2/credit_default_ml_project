@@ -1,0 +1,7 @@
+Timestamp,Response_Time,Credit_Given,Gender,EDUCATION,MARRIAGE,PAY_0,PAY_2,PAY_3,PAY_4,PAY_5,PAY_6,BILL_AMT1,BILL_AMT2,BILL_AMT3,BILL_AMT4,BILL_AMT5,BILL_AMT6,PAY_AMT1,PAY_AMT2,PAY_AMT3,PAY_AMT4,PAY_AMT5,PAY_AMT6,Prediction
+2023-02-28 22:15:11.662792,0.023,10000,Male,University,Married,One month delay,Duly Paid,Duly Paid,Duly Paid,Duly Paid,Duly Paid,1000,1000,0,0,0,0,10,0,0,0,0,0,Default
+2023-02-28 22:15:55.067500,0.02,100000,Female,University,Married,One month delay,Duly Paid,Duly Paid,Duly Paid,Duly Paid,Duly Paid,1000,1000,0,0,0,0,10,0,0,0,0,0,Default
+2023-02-28 22:16:30.713420,0.0212,50000,Female,University,Married,One month delay,Duly Paid,Duly Paid,Duly Paid,Duly Paid,Duly Paid,23500,0,0,0,0,0,0,0,0,0,0,0,Not Default
+2023-02-28 22:17:48.273099,0.019,500000,Male,Graduate School,Single,One month delay,Duly Paid,Duly Paid,Duly Paid,Duly Paid,Duly Paid,395670,0,0,0,0,0,0,0,0,0,0,0,Not Default
+2023-02-28 22:19:05.819812,0.0207,100000,Male,Others,Others,Four months delay,Five month delay,Eight months delay,Eight months delay,Eight months delay,Eight months delay,10000,0,0,0,0,0,1000,0,0,0,0,0,Not Default
+2023-02-28 22:19:43.045640,0.026,1000,Male,Others,Single,Four months delay,Five month delay,Eight months delay,Eight months delay,Eight months delay,Eight months delay,10000,0,0,0,0,0,1000,0,0,0,0,0,Default
