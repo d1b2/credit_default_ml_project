@@ -12,12 +12,26 @@
 <a href="https://dvc.org/doc"><img src="https://img.shields.io/badge/-DVC-E65933?style=for-the-badge&logo=dvc&logoColor=2CB6CD" alt= "dvc"></a>
 <a href="https://www.evidentlyai.com/"><img src="https://img.shields.io/badge/-evidently-green?style=for-the-badge&evidently=dvc&logoColor=white" alt= "evidently"></a>
 <a href="https://mlflow.org/">  <img src="https://img.shields.io/badge/-mlflow-1767BB?style=for-the-badge&logo=mlflow&logoColor=white" alt= "mlflow"></a>
+
+## Problem Statement
+Financial threats are displaying a trend about the credit risk of commercial banks as the incredible improvement in the financial industry has arisen. In this way, one of the biggest threats faces by commercial banks is the risk prediction of credit clients. The goal is to predict the probability of credit default based on credit card owner's characteristics and payment history.
+## Approach
+Created a 5 step pipeline.
+1. Data Ingestion : Data is gathered from kaggle url using api.It is then unzipped and splitted in test and train.
+2. Data Validation : Both test and train datasets are validated with schema file.
+3. Data Preparation : Data is cleaned resampled and transformed.
+4. Model Training : Models are trained and their parameters and metrics are saved.
+5. Model Tuning :  Selected model is tuned further to obtain final model. This model is used in flask application
+## Stage Codeflow
+<img src="https://github.com/d1b2/credit_default_ml_project/blob/main/app/static/satges_codeflow.png">
+
+## Result
+Build a flask based application solution which is able to predict whether customer defaults or not  based on credit card owner’s characteristics and payment history.
 ## Flask application demo
 
 <img src="app/static/app_demo.gif" width="500" height="300"> 
 
-## Stage Codeflow
-<img src="https://github.com/d1b2/credit_default_ml_project/blob/main/app/static/satges_codeflow.png">
+
 
 
 ## 💻 Setup

@@ -8,7 +8,7 @@ csv_path='app/database.csv'
 if not os.path.exists(csv_path):
     create_records_header(csv_path)
 app = Flask(__name__)
-model = pickle.load(open('pipe_model.pkl', 'rb'))
+model = pickle.load(open('artifacts/model_tuning/pipe_model.pkl', 'rb'))
 
 @app.route('/')
 def home():

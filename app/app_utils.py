@@ -68,7 +68,7 @@ def create_records_html(csv_path,html_path):
                 'padding-right': '10px',
                 'padding-top': '2px',
                 'padding-bottom': '2px'}
-                ).hide(axis="index").set_caption('User Data Record')
+                ).hide_index().set_caption('User Data Record')
         df_html_styled.to_html(html_path)
         #pd.read_csv(csv_path).to_html(html_path)
     except Exception as e:
